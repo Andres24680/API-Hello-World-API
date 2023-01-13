@@ -50,10 +50,17 @@ languages.get('/', (req, res) => {
         })
 })
 
+languages.get("/random", async (req, res) => {
+    let foundLanguages = await Language.find()
+    res.json(foundLanguages[Math.floor(Math.random() * foundLanguages.length)])
+})
+
+
 // Show:
-languages.get('/:name', (req, res) => {
+languages.get('/:language', (req, res) => {
     Language.findOne({ name: req.params.name.toLowerCase() })
         .then(foundLanguage => {
             res.json(foundLanguage)
         })
 })
+
